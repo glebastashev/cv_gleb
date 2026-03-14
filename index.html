@@ -812,17 +812,23 @@
     @media (max-width: 1024px) {
       .approach__block {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 28px;
       }
 
-      .approach__screenshots {
-        order: -1;
-      }
+      /* screenshots come AFTER text — natural HTML order, no reordering */
     }
 
     @media (max-width: 480px) {
       .approach__screenshots {
-        grid-template-columns: 1fr;
+        /* keep 2 columns side by side — do NOT stack */
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .approach__screenshot img {
+        max-height: 140px;
+        object-fit: cover;
+        object-position: top;
       }
     }
   </style>
