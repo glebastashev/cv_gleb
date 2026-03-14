@@ -70,6 +70,11 @@ ul {
   padding: 0 40px;
 }
 
+/* nav needs its container to stretch full height so flex centering works */
+.nav .container {
+  height: 100%;
+}
+
 .section-label {
   font-family: var(--font-body);
   font-size: 11px;
@@ -331,7 +336,7 @@ ul {
 .hero {
   min-height: 100vh;
   padding-top: var(--nav-h);
-  padding-bottom: 40px;
+  padding-bottom: var(--nav-h);
   display: flex;
   align-items: center;
   justify-content: center;
