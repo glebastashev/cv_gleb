@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Глеб Асташев — Mind Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --accent: #1B3A8C;
+            --accent-lt: #E8EDF8;
+            --text: #111111;
+            --text-muted: #888888;
+            --bg: #F7F7F5;
+            --white: #FFFFFF;
+            --font-d: 'Bebas Neue', sans-serif;
+            --font-b: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-b);
+            background: var(--bg);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            user-select: none;
+        }
+
+        /* ── TOOLBAR ── */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            z-index: 100;
+        }
+
+        .toolbar__logo {
+            font-family: var(--font-d);
+            font-size: 18px;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+        }
+
+        .toolbar__hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.04em;
+        }
+
+        .toolbar__actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toolbar__btn {
+            font-family: var(--font-b);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border-radius: 3px;
+            border: 1px solid #E5E5E5;
+            background: white;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toolbar__btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── CANVAS ── */
+        #canvas {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding-top: 56px;
+            overflow: hidden;
+        }
+
+        /* SVG lines layer */
+        #svg-layer {
+            position: absolute;
+            top: 56px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 56px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ── NODES ── */
+        .node {
+            position: absolute;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .node:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+        }
+
+        /* Center node */
+        .node--center .node__box {
+            background: var(--accent);
+            color: white;
+            font-family: var(--font-d);
+            font-size: 28px;
+            letter-spacing: 0.08em;
+            padding: 22px 36px;
+            border-radius: 6px;
+            line-height: 1.1;
+            text-align: center;
+            box-shadow: 0 12px 48px rgba(27, 58, 140, 0.35);
+            cursor: default;
+        }
+
+        .node--center:hover {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .node--center .node__box:hover {
+            transform: none;
+        }
+
+        /* Branch node */
+        .node--branch .node__box {
+            background: var(--accent);
+            color: white;
+            font-family: var(--font-b);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 13px 22px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 6px 24px rgba(27, 58, 140, 0.25);
+            min-width: 140px;
+            max-width: 170px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .node--branch.active .node__box {
+            background: var(--text);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .node--branch .node__icon {
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .node--branch .node__chevron {
+            font-size: 10px;
+            opacity: 0.7;
+            transition: transform 0.3s;
+            margin-left: 2px;
+            flex-shrink: 0;
+        }
+
+        .node--branch.active .node__chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Leaf node */
+        .node--leaf .node__box {
+            background: white;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 1.4;
+            padding: 10px 16px;
+            border-radius: 4px;
+            border: 1px solid #E5E5E5;
+            text-align: center;
+            max-width: 180px;
+            min-width: 120px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: border-color 0.2s, background 0.2s;
+            cursor: default;
+        }
+
+        .node--leaf:hover .node__box {
+            border-color: var(--accent);
+            background: var(--accent-lt);
+            transform: none;
+        }
+
+        .node--leaf:hover {
+            transform: translate(-50%, -50%) scale(1.03);
+        }
+
+        /* Leaf highlight (for numbers/bold items) */
+        .node--leaf.highlight .node__box {
+            border-color: rgba(27, 58, 140, 0.3);
+            background: var(--accent-lt);
+        }
+
+        .node--leaf.highlight .node__box {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* ── ANIMATIONS ── */
+        .node--leaf {
+            transition:
+                opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .node--leaf.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.7);
+        }
+
+        .node--leaf.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* SVG lines */
+        .line-branch {
+            stroke: var(--accent);
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .line-leaf {
+            stroke: #C5D0EC;
+            stroke-width: 1.5;
+            fill: none;
+            transition: opacity 0.35s;
+        }
+
+        .line-leaf.hidden {
+            opacity: 0;
+        }
+
+        .line-leaf.visible {
+            opacity: 1;
+        }
+
+        /* ── INSTRUCTION OVERLAY ── */
+        .instruction {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #E5E5E5;
+            border-radius: 40px;
+            padding: 10px 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            z-index: 200;
+            letter-spacing: 0.04em;
+            animation: fadeUp 0.5s ease forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ── DRAG ── */
+        #canvas {
+            cursor: grab;
+        }
+
+        #canvas.dragging {
+            cursor: grabbing;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .toolbar__hint {
+                display: none;
+            }
+
+            .node--center .node__box {
+                font-size: 20px;
+                padding: 16px 24px;
+            }
+
+            .node--branch .node__box {
+                font-size: 10px;
+                padding: 10px 14px;
+                min-width: 110px;
+            }
+
+            .node--leaf .node__box {
+                font-size: 11px;
+                padding: 8px 12px;
+                max-width: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <span class="toolbar__logo">ГЛЕБ АСТАШЕВ — MIND MAP</span>
+        <span class="toolbar__hint">Нажми на ветку, чтобы раскрыть / закрыть</span>
+        <div class="toolbar__actions">
+            <button class="toolbar__btn" id="expandAll">Раскрыть всё</button>
+            <button class="toolbar__btn" id="collapseAll">Свернуть всё</button>
+        </div>
+    </div>
+
+    <!-- SVG Lines -->
+    <svg id="svg-layer"></svg>
+
+    <!-- Nodes Container -->
+    <div id="canvas">
+        <div id="nodes"></div>
+    </div>
+
+    <div class="instruction">Нажми на любую ветку · Зажми и тащи чтобы сдвинуть</div>
+
+    <script>
+        /* ═══════════════════════════════════
+           DATA
+        ═══════════════════════════════════ */
+        const BRANCHES = [
+            {
+                id: 'about',
+                label: 'ОБО МНЕ',
+                icon: '👤',
+                angle: 210,
+                leaves: [
+                    { label: 'Психолог · WSFIZ Варшава', highlight: false },
+                    { label: 'MBA ОИПП Москва', highlight: false },
+                    { label: '3,5 млн ₽ в образование', highlight: true },
+                    { label: 'Работаю от продукта', highlight: false },
+                    { label: 'Долгосрочное партнёрство', highlight: false },
+                    { label: 'ИИ + вайбкодинг', highlight: false },
+                    { label: 'Продажи через психологию', highlight: false },
+                ]
+            },
+            {
+                id: 'method',
+                label: 'МЕТОДОЛОГИЯ',
+                icon: '🔄',
+                angle: 270,
+                leaves: [
+                    { label: '01 · Диагностика', highlight: false },
+                    { label: '02 · Смысловое ядро', highlight: false },
+                    { label: '03 · Система и команда', highlight: false },
+                    { label: '04 · Запуск и рост', highlight: false },
+                    { label: 'Спринты: год → квартал → месяц', highlight: false },
+                ]
+            },
+            {
+                id: 'formats',
+                label: 'ФОРМАТЫ',
+                icon: '🤝',
+                angle: 330,
+                leaves: [
+                    { label: 'Продюсер — полный цикл', highlight: false },
+                    { label: 'CMO — маркетинг', highlight: false },
+                    { label: 'CEO — управление', highlight: false },
+                    { label: 'Консультант / Трекер', highlight: false },
+                    { label: 'Проджект — координация', highlight: false },
+                    { label: 'Наставник — обучение', highlight: false },
+                ]
+            },
+            {
+                id: 'results',
+                label: 'РЕЗУЛЬТАТЫ',
+                icon: '📊',
+                angle: 30,
+                leaves: [
+                    { label: '400+ млн ₽ в проектах', highlight: true },
+                    { label: '220 000 $/мес — рекорд', highlight: true },
+                    { label: '650K+ подписчиков за 0 ₽', highlight: true },
+                    { label: '11 проектов → 1 млн ₽', highlight: true },
+                ]
+            },
+            {
+                id: 'cases',
+                label: 'КЕЙСЫ',
+                icon: '💼',
+                angle: 90,
+                leaves: [
+                    { label: 'IT-Компот → $220K/мес', highlight: true },
+                    { label: 'ИОТ → 74 млн ₽ за 3 года', highlight: true },
+                    { label: 'Тая Дейн → 59 млн ₽', highlight: true },
+                    { label: 'А. Хахадетка → 1,8 млн ₽', highlight: true },
+                    { label: 'Telegram → 10 млн ₽ / 6 мес', highlight: true },
+                    { label: 'В. Мартынов → 1 млн ₽ с 0', highlight: true },
+                ]
+            },
+            {
+                id: 'forwhom',
+                label: 'ДЛЯ КОГО',
+                icon: '🎯',
+                angle: 150,
+                leaves: [
+                    { label: 'Онлайн-школы на масштаб', highlight: false },
+                    { label: 'Эксперты с аудиторией', highlight: false },
+                    { label: 'Запуск с нуля', highlight: false },
+                    { label: 'Частные практики', highlight: false },
+                    { label: 'Проекты в кризисе', highlight: false },
+                    { label: 'Резонанс по ценностям — принцип', highlight: false },
+                ]
+            },
+        ];
+
+        /* ═══════════════════════════════════
+           LAYOUT CONFIG
+        ═══════════════════════════════════ */
+        const BRANCH_RADIUS = 260;
+        const LEAF_RADIUS = 210;
+
+        let offset = { x: 0, y: 0 };
+        let centerX, centerY;
+
+        function getCenter() {
+            const canvas = document.getElementById('canvas');
+            return {
+                x: canvas.clientWidth / 2 + offset.x,
+                y: canvas.clientHeight / 2 + offset.y,
+            };
+        }
+
+        function polar(angle, radius) {
+            const rad = (angle - 90) * Math.PI / 180;
+            return { x: Math.cos(rad) * radius, y: Math.sin(rad) * radius };
+        }
+
+        /* ═══════════════════════════════════
+           BUILD DOM
+        ═══════════════════════════════════ */
+        const nodesEl = document.getElementById('nodes');
+        const svgEl = document.getElementById('svg-layer');
+        const state = {}; // { branchId: boolean }
+
+        BRANCHES.forEach(branch => {
+            state[branch.id] = false; // collapsed
+
+            // Branch node
+            const branchEl = document.createElement('div');
+            branchEl.className = 'node node--branch';
+            branchEl.id = `branch-${branch.id}`;
+            branchEl.innerHTML = `
+    <div class="node__box">
+      <span class="node__icon">${branch.icon}</span>
+      <span>${branch.label}</span>
+      <span class="node__chevron">▼</span>
+    </div>`;
+            nodesEl.appendChild(branchEl);
+
+            branchEl.addEventListener('click', () => toggleBranch(branch.id));
+
+            // Leaf nodes
+            branch.leaves.forEach((leaf, i) => {
+                const leafEl = document.createElement('div');
+                leafEl.className = `node node--leaf hidden${leaf.highlight ? ' highlight' : ''}`;
+                leafEl.id = `leaf-${branch.id}-${i}`;
+                leafEl.innerHTML = `<div class="node__box">${leaf.label}</div>`;
+                nodesEl.appendChild(leafEl);
+            });
+        });
+
+        /* ═══════════════════════════════════
+           SVG lines
+        ═══════════════════════════════════ */
+        function makePath(id, cls) {
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.id = id;
+            path.classList.add(cls);
+            svgEl.appendChild(path);
+            return path;
+        }
+
+        // Create SVG paths upfront
+        BRANCHES.forEach(branch => {
+            makePath(`line-branch-${branch.id}`, 'line-branch');
+            branch.leaves.forEach((_, i) => {
+                const p = makePath(`line-leaf-${branch.id}-${i}`, 'line-leaf');
+                p.classList.add('hidden');
+            });
+        });
+
+        function cubicPath(x1, y1, x2, y2) {
+            const dx = (x2 - x1) * 0.5;
+            return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+        }
+
+        /* ═══════════════════════════════════
+           POSITION NODES
+        ═══════════════════════════════════ */
+        function positionAll() {
+            const c = getCenter();
+
+            BRANCHES.forEach(branch => {
+                const bp = polar(branch.angle, BRANCH_RADIUS);
+                const bx = c.x + bp.x;
+                const by = c.y + bp.y;
+
+                const branchEl = document.getElementById(`branch-${branch.id}`);
+                branchEl.style.left = bx + 'px';
+                branchEl.style.top = by + 'px';
+
+                // Branch line (center → branch)
+                const lineBranch = document.getElementById(`line-branch-${branch.id}`);
+                lineBranch.setAttribute('d', cubicPath(c.x, c.y, bx, by));
+
+                // Leaves — fan around branch angle
+                const n = branch.leaves.length;
+                const spread = Math.min(70, 140 / Math.max(n - 1, 1));
+                const startAngle = branch.angle - (spread * (n - 1)) / 2;
+
+                branch.leaves.forEach((_, i) => {
+                    const leafAngle = startAngle + spread * i;
+                    const lp = polar(leafAngle, LEAF_RADIUS);
+                    const lx = bx + lp.x;
+                    const ly = by + lp.y;
+
+                    const leafEl = document.getElementById(`leaf-${branch.id}-${i}`);
+                    leafEl.style.left = lx + 'px';
+                    leafEl.style.top = ly + 'px';
+
+                    const lineLeaf = document.getElementById(`line-leaf-${branch.id}-${i}`);
+                    lineLeaf.setAttribute('d', cubicPath(bx, by, lx, ly));
+                });
+            });
+        }
+
+        /* ═══════════════════════════════════
+           TOGGLE
+        ═══════════════════════════════════ */
+        function toggleBranch(id, forceOpen) {
+            const open = forceOpen !== undefined ? forceOpen : !state[id];
+            state[id] = open;
+
+            const branchEl = document.getElementById(`branch-${id}`);
+            branchEl.classList.toggle('active', open);
+
+            const branch = BRANCHES.find(b => b.id === id);
+            branch.leaves.forEach((_, i) => {
+                const leafEl = document.getElementById(`leaf-${id}-${i}`);
+                const lineEl = document.getElementById(`line-leaf-${id}-${i}`);
+                if (open) {
+                    leafEl.classList.remove('hidden');
+                    leafEl.classList.add('visible');
+                    lineEl.classList.remove('hidden');
+                    lineEl.classList.add('visible');
+                } else {
+                    leafEl.classList.add('hidden');
+                    leafEl.classList.remove('visible');
+                    lineEl.classList.add('hidden');
+                    lineEl.classList.remove('visible');
+                }
+            });
+        }
+
+        /* ═══════════════════════════════════
+           EXPAND / COLLAPSE ALL
+        ═══════════════════════════════════ */
+        document.getElementById('expandAll').addEventListener('click', () => {
+            BRANCHES.forEach(b => toggleBranch(b.id, true));
+        });
+        document.getElementById('collapseAll').addEventListener('click', () => {
+            BRANCHES.forEach(b => toggleBranch(b.id, false));
+        });
+
+        /* ═══════════════════════════════════
+           DRAG TO PAN
+        ═══════════════════════════════════ */
+        let dragging = false;
+        let dragStart = { x: 0, y: 0 };
+        const canvas = document.getElementById('canvas');
+
+        canvas.addEventListener('mousedown', e => {
+            if (e.target.closest('.node')) return;
+            dragging = true;
+            dragStart = { x: e.clientX - offset.x, y: e.clientY - offset.y };
+            canvas.classList.add('dragging');
+        });
+        window.addEventListener('mousemove', e => {
+            if (!dragging) return;
+            offset.x = e.clientX - dragStart.x;
+            offset.y = e.clientY - dragStart.y;
+            positionAll();
+        });
+        window.addEventListener('mouseup', () => {
+            dragging = false;
+            canvas.classList.remove('dragging');
+        });
+
+        // Touch drag
+        canvas.addEventListener('touchstart', e => {
+            const t = e.touches[0];
+            dragStart = { x: t.clientX - offset.x, y: t.clientY - offset.y };
+        }, { passive: true });
+        canvas.addEventListener('touchmove', e => {
+            const t = e.touches[0];
+            offset.x = t.clientX - dragStart.x;
+            offset.y = t.clientY - dragStart.y;
+            positionAll();
+        }, { passive: true });
+
+        /* ═══════════════════════════════════
+           CENTER NODE
+        ═══════════════════════════════════ */
+        const centerEl = document.createElement('div');
+        centerEl.className = 'node node--center';
+        centerEl.id = 'center-node';
+        centerEl.innerHTML = `<div class="node__box">АСТАШЕВ<br>ГЛЕБ</div>`;
+        nodesEl.appendChild(centerEl);
+
+        function positionCenter() {
+            const c = getCenter();
+            centerEl.style.left = c.x + 'px';
+            centerEl.style.top = c.y + 'px';
+        }
+
+        /* ═══════════════════════════════════
+           SVG SIZE
+        ═══════════════════════════════════ */
+        function resizeSVG() {
+            const canvas = document.getElementById('canvas');
+            svgEl.setAttribute('width', canvas.clientWidth);
+            svgEl.setAttribute('height', canvas.clientHeight);
+        }
+
+        /* ═══════════════════════════════════
+           INIT
+        ═══════════════════════════════════ */
+        function init() {
+            resizeSVG();
+            positionCenter();
+            positionAll();
+        }
+
+        window.addEventListener('resize', () => {
+            resizeSVG();
+            positionCenter();
+            positionAll();
+        });
+
+        init();
+
+        // Hide instruction after 4s
+        setTimeout(() => {
+            const instr = document.querySelector('.instruction');
+            if (instr) {
+                instr.style.transition = 'opacity 0.5s';
+                instr.style.opacity = '0';
+                setTimeout(() => instr.remove(), 500);
+            }
+        }, 4000);
+    </script>
+</body>
+
+</html>

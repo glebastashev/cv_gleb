@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Глеб Асташев — Продюсер · CMO · CEO · Консультант</title>
+  <meta name="description"
+    content="Глеб Асташев — продюсер, CMO, CEO, консультант. Запускаю проекты с нуля, масштабирую действующие и вывожу из кризиса. 400+ млн ₽ выручки в проектах." />
+  <meta property="og:title" content="Глеб Асташев — Продюсер · CMO · CEO" />
+  <meta property="og:description"
+    content="Запускаю проекты с нуля, масштабирую действующие и вывожу из кризиса — уже в первый месяц." />
+  <meta property="og:image" content="assets/photo_hero.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ── EXTRA STYLES FOR NEW SECTIONS ── */
+
+    /* POSITIONING section */
+    .positioning {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .positioning__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .positioning__photo {
+      position: relative;
+    }
+
+    .positioning__photo img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .positioning__content {}
+
+    .positioning__lead {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .positioning__lead strong {
+      font-weight: 700;
+    }
+
+    .positioning__text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    /* STATS bar */
+    .stats-bar {
+      background: var(--accent);
+      padding: 0;
+    }
+
+    .stats-bar__inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-item {
+      padding: 36px 32px;
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 0.2s;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .stat-item__num {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3vw, 40px);
+      letter-spacing: 0.03em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-item__label {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.4;
+    }
+
+    /* CASES section */
+    .cases-full {
+      padding: 120px 0;
+      background: var(--bg);
+    }
+
+    .cases-full__header {
+      margin-bottom: 72px;
+    }
+
+    .case-block {
+      margin-bottom: 72px;
+      padding-bottom: 72px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .case-block:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .case-block__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+
+    .case-block__left {}
+
+    .case-block__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .case-block__year {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .case-block__tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 2px;
+    }
+
+    .case-block__name {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 56px);
+      letter-spacing: 0.04em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .case-block__role {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .case-block__result-big {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .case-block__result-num {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .case-block__result-sub {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .case-block__before {
+      background: var(--bg-alt);
+      border-left: 3px solid var(--border);
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .case-block__before strong {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .case-block__results-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .case-block__list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .case-block__list li {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .case-block__list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    /* Mini cases */
+    .cases-mini {
+      padding: 0 0 80px;
+      background: var(--bg);
+    }
+
+    .cases-mini__label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    .cases-mini__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .mini-case {
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+      transition: all 0.25s;
+    }
+
+    .mini-case:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .mini-case__title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .mini-case__desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .mini-case__result {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+    }
+
+    /* DIFF section */
+    .diff {
+      padding: 120px 0;
+      background: var(--bg-alt);
+    }
+
+    .diff__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 64px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .diff-card {
+      background: var(--bg-alt);
+      padding: 40px 36px;
+      transition: background 0.25s;
+    }
+
+    .diff-card:hover {
+      background: #EEEEE8;
+    }
+
+    .diff-card__num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+
+    .diff-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .diff-card__text {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.75;
+    }
+
+    /* FORMATS section — dark */
+    .formats {
+      padding: 120px 0;
+      background: var(--bg-dark);
+      color: var(--text-inv);
+    }
+
+    .formats .section-label {
+      color: #6B8FDE;
+    }
+
+    .formats .section-title {
+      color: var(--text-inv);
+    }
+
+    .formats__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 64px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .format-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      transition: background 0.2s;
+    }
+
+    .format-row:last-child {
+      border-bottom: none;
+    }
+
+    .format-row:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .format-row__label {
+      padding: 32px 36px;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .format-row__type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B8FDE;
+      margin-bottom: 8px;
+    }
+
+    .format-row__name {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 0.04em;
+      color: var(--text-inv);
+    }
+
+    .format-row__desc {
+      padding: 32px 40px;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(245, 243, 238, 0.65);
+      line-height: 1.7;
+      display: flex;
+      align-items: center;
+    }
+
+    /* SKILLS section */
+    .skills {
+      padding: 120px 0;
+      background: var(--bg);
+    }
+
+    .skills__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 64px;
+    }
+
+    .skills__col-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .skills__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--bg);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* EDUCATION section — dark */
+    .education {
+      padding: 120px 0;
+      background: var(--bg-dark);
+      color: var(--text-inv);
+    }
+
+    .education .section-label {
+      color: #6B8FDE;
+    }
+
+    .education .section-title {
+      color: var(--text-inv);
+    }
+
+    .education__top {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2vw, 26px);
+      letter-spacing: 0.06em;
+      color: #6B8FDE;
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .education__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .edu-card {
+      background: var(--bg-dark);
+      padding: 40px;
+      transition: background 0.25s;
+    }
+
+    .edu-card:hover {
+      background: #1A1A1A;
+    }
+
+    .edu-card__org {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B8FDE;
+      margin-bottom: 10px;
+    }
+
+    .edu-card__title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      color: var(--text-inv);
+      margin-bottom: 8px;
+    }
+
+    .edu-card__info {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(245, 243, 238, 0.5);
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 160px 0;
+      background: var(--bg-dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(27, 58, 140, 0.15) 0%, transparent 70%);
+    }
+
+    .cta__inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta__title {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 10vw, 140px);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--text-inv);
+      margin-bottom: 32px;
+    }
+
+    .cta__subtitle {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(245, 243, 238, 0.6);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+
+    .cta__buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .cta__contacts {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .cta__contact {
+      font-size: 13px;
+      color: rgba(245, 243, 238, 0.38);
+    }
+
+    .cta__contact a {
+      color: rgba(245, 243, 238, 0.38);
+      transition: color 0.2s;
+    }
+
+    .cta__contact a:hover {
+      color: #6B8FDE;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 28px 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__logo {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: #fff;
+    }
+
+    .footer__roles {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(245, 243, 238, 0.3);
+      letter-spacing: 0.06em;
+    }
+
+    /* Responsive extras */
+    @media (max-width: 1024px) {
+      .stats-bar__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .diff__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .format-row {
+        grid-template-columns: 1fr;
+      }
+
+      .format-row__label {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 24px 28px 16px;
+      }
+
+      .format-row__desc {
+        padding: 16px 28px 24px;
+      }
+
+      .skills__inner {
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .positioning__inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stats-bar__inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .case-block__header {
+        flex-direction: column;
+      }
+
+      .case-block__result-big {
+        text-align: left;
+      }
+
+      .diff__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .education__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cases-mini__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-bar__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* HOW I INFLUENCE RESULTS section */
+    .approach {
+      padding: 120px 0;
+      background: var(--bg);
+    }
+
+    .approach__subtitle {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-light);
+      margin-bottom: 80px;
+      max-width: 560px;
+    }
+
+    .approach__blocks {
+      display: flex;
+      flex-direction: column;
+      gap: 96px;
+    }
+
+    .approach__block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .approach__block-num {
+      font-family: var(--font-display);
+      font-size: 80px;
+      color: var(--accent);
+      opacity: 0.12;
+      line-height: 1;
+      margin-bottom: -16px;
+      user-select: none;
+    }
+
+    .approach__block-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 40px);
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .approach__block-text {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    .approach__screenshots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .approach__screenshot {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .approach__screenshot:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    .approach__screenshot img {
+      width: 100%;
+      display: block;
+    }
+
+    .approach__screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-alt);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--text-light);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .approach__screenshot-placeholder svg {
+      opacity: 0.3;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      .approach__block {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .approach__screenshots {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .approach__screenshots {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#hero" class="nav__logo">ГЛЕБ АСТАШЕВ</a>
+        <div class="nav__links">
+          <a href="#positioning">Обо мне</a>
+          <a href="#cases">Кейсы</a>
+          <a href="#diff">Подход</a>
+          <a href="#formats">Форматы</a>
+          <a href="#cta">Контакт</a>
+        </div>
+        <a href="https://t.me/glebastashev" class="nav__cta" target="_blank" rel="noopener">Написать</a>
+        <button class="nav__burger" id="burger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav__dropdown" id="navDropdown">
+      <a href="#positioning">Обо мне</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#diff">Подход</a>
+      <a href="#formats">Форматы</a>
+      <a href="#skills">Навыки</a>
+      <a href="#education">Образование</a>
+      <a href="#cta">Контакт</a>
+    </div>
+  </nav>
+
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge reveal">
+            <span class="hero__badge-dot"></span>
+            1 открытый слот · Март 2026
+          </div>
+          <p class="hero__role reveal reveal-delay-1">Продюсер · CMO · CEO · Консультант</p>
+          <h1 class="hero__name reveal reveal-delay-2">АСТАШЕВ<br>ГЛЕБ</h1>
+          <p class="hero__subtitle reveal reveal-delay-3">
+            Запускаю проекты с нуля, масштабирую действующие и вывожу из кризиса — уже в первый месяц внедрения
+          </p>
+          <p class="hero__sub-text reveal reveal-delay-4">
+            Telegram: <a href="https://t.me/glebastashev" target="_blank" rel="noopener"
+              style="color:var(--accent); font-weight:600;">@glebastashev</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            WhatsApp: <a href="https://wa.me/995558184186" target="_blank" rel="noopener"
+              style="color:var(--text-light);">+995 558 184 186</a>
+          </p>
+          <div class="hero__buttons reveal reveal-delay-5">
+            <a href="https://t.me/glebastashev" class="btn btn-primary" target="_blank" rel="noopener">Обсудить
+              проект</a>
+            <a href="#cases" class="btn btn-outline">Посмотреть кейсы</a>
+          </div>
+        </div>
+        <div class="hero__photo-wrap reveal reveal-delay-2">
+          <img src="assets/photo_hero.jpg" alt="Глеб Асташев" class="hero__photo" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ STATS BAR ═══ -->
+  <div class="stats-bar">
+    <div class="stats-bar__inner">
+      <div class="stat-item reveal">
+        <div class="stat-item__num">400+ млн ₽</div>
+        <div class="stat-item__label">суммарной выручки в проектах</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-item__num">220 000 $/мес</div>
+        <div class="stat-item__label">с кассового разрыва на 220 000$ на второй месяц работы</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-item__num">650 000+</div>
+        <div class="stat-item__label">подписчиков привлечено за 0 ₽</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-item__num">11</div>
+        <div class="stat-item__label">проектов с нуля до 1 млн ₽ с первой итерации</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══ ПОЗИЦИОНИРОВАНИЕ ═══ -->
+  <section class="positioning" id="positioning">
+    <div class="container">
+      <div class="positioning__inner">
+        <div class="positioning__photo reveal">
+          <img src="assets/photo_about.jpg" alt="Глеб Асташев" />
+        </div>
+        <div class="positioning__content">
+          <p class="section-label reveal">Позиционирование</p>
+          <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 36px;">Кто я</h2>
+          <p class="positioning__lead reveal reveal-delay-2">
+            Запускаю проекты с нуля, масштабирую действующие и вывожу из кризиса — уже в первый месяц внедрения.
+          </p>
+          <p class="positioning__text reveal reveal-delay-3">
+            Строю систему: продукт, экономика, маркетинг, воронки и команда — чтобы выручка была предсказуемой и
+            растущей.
+          </p>
+          <p class="positioning__text reveal reveal-delay-4">
+            Вижу бизнес целиком: нахожу точки роста и узкие горлышки, фокусирую команду на ключевых действиях, которые
+            реально двигают результат.
+          </p>
+          <p class="positioning__text reveal reveal-delay-5"
+            style="margin-top: 8px; font-size: 13px; color: var(--text-light);">
+            Сотни созданных сайтов, лендингов, продуктов и продающих презентаций
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══ КАК ВЛИЯЮ НА РЕЗУЛЬТАТ ═══ -->
+  <section class="approach" id="approach">
+    <div class="container">
+      <p class="section-label reveal">Методология</p>
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 20px;">Как я влияю на результат?</h2>
+      <p class="approach__subtitle reveal reveal-delay-2">2 главные особенности подхода</p>
+
+      <div class="approach__blocks">
+
+        <!-- Блок 1: РНП и аналитика -->
+        <div class="approach__block reveal">
+          <div class="approach__text-col">
+            <div class="approach__block-num">01</div>
+            <div class="approach__block-title">РНП и аналитика</div>
+            <p class="approach__block-text">
+              Нахожу ключевые действия, ориентируясь на факт — цифры и статистику.
+              Выстраиваю работу команды по двум векторам: нашли узкое горлышко — подкрутили,
+              определили точку роста (сильное) — усилили это.
+            </p>
+          </div>
+          <div class="approach__screenshots">
+            <div class="approach__screenshot">
+              <img src="assets/screen-analytics-1.png" alt="Аналитика — отчёт по ключевым метрикам"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="approach__screenshot-placeholder" style="display:none;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+                Скрин 1<br>аналитика
+              </div>
+            </div>
+            <div class="approach__screenshot">
+              <img src="assets/screen-analytics-2.png" alt="Факторный анализ"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="approach__screenshot-placeholder" style="display:none;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+                Скрин 2<br>факторный анализ
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Блок 2: Большая идея -->
+        <div class="approach__block reveal">
+          <div class="approach__text-col">
+            <div class="approach__block-num">02</div>
+            <div class="approach__block-title">Создаю большую идею — сильный оффер продукта и от него строю запуск</div>
+            <p class="approach__block-text">
+              Доношу наше предложение до аудитории в форме, которая будет им максимально понятна
+              и «отпечатается» как на рациональном, так и на психо-эмоциональном уровне.
+            </p>
+          </div>
+          <div class="approach__screenshots">
+            <div class="approach__screenshot">
+              <img src="assets/screen-concept-1.png" alt="Смысловая карта запуска"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="approach__screenshot-placeholder" style="display:none;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+                Скрин 3<br>смыслы и оффер
+              </div>
+            </div>
+            <div class="approach__screenshot">
+              <img src="assets/screen-concept-2.png" alt="Структура запуска"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="approach__screenshot-placeholder" style="display:none;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M3 9h18M9 21V9" />
+                </svg>
+                Скрин 4<br>структура запуска
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ ЧЕМ ОТЛИЧАЮСЬ ═══ -->
+  <section class="diff" id="diff">
+    <div class="container">
+      <p class="section-label reveal">Дифференциаторы</p>
+      <h2 class="section-title reveal reveal-delay-1">Чем отличаюсь</h2>
+      <div class="diff__grid">
+        <div class="diff-card reveal">
+          <div class="diff-card__num">01</div>
+          <div class="diff-card__title">Точность</div>
+          <div class="diff-card__text">Нахожу ключевые действия и узкие горлышки, распределяю ресурс команды, справляюсь
+            с большим объёмом задач с минимальным штатом — без раздутых расходов.</div>
+        </div>
+        <div class="diff-card reveal reveal-delay-1">
+          <div class="diff-card__num">02</div>
+          <div class="diff-card__title">Смысловик</div>
+          <div class="diff-card__text">Вычленяю суть, собираю большую идею и доношу её понятными, продающими словами. Не
+            шаблонный маркетинг, а смыслы, которые резонируют с аудиторией и продают.</div>
+        </div>
+        <div class="diff-card reveal reveal-delay-2">
+          <div class="diff-card__num">03</div>
+          <div class="diff-card__title">Работаю от продукта</div>
+          <div class="diff-card__text">Сначала создаю оффер, от которого грех отказаться. Потом формирую из него
+            стратегию и смыслы. Маркетинг строится вокруг сильного продукта, а не наоборот.</div>
+        </div>
+        <div class="diff-card reveal reveal-delay-3">
+          <div class="diff-card__num">04</div>
+          <div class="diff-card__title">Психологическое образование</div>
+          <div class="diff-card__text">Образование психолога — не просто строчка в резюме. Понимаю людей на глубинном
+            уровне. Это фундамент и маркетинга, и продаж, и управления командой.</div>
+        </div>
+        <div class="diff-card reveal reveal-delay-4">
+          <div class="diff-card__num">05</div>
+          <div class="diff-card__title">ИИ и современные инструменты</div>
+          <div class="diff-card__text">Активно использую AI-инструменты и вайбкодинг на высоком уровне — задачи
+            закрываются быстрее и дешевле. В том числе, обучаю этому команду.</div>
+        </div>
+        <div class="diff-card reveal reveal-delay-5">
+          <div class="diff-card__num">06</div>
+          <div class="diff-card__title">Быстрое включение и результат</div>
+          <div class="diff-card__text">В каждом из ключевых проектов давал ощутимый результат в первый месяц работы. Не
+            разгон и не аудит на полгода, а конкретные деньги.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ КЕЙСЫ ═══ -->
+  <section class="cases-full" id="cases">
+    <div class="container">
+      <div class="cases-full__header">
+        <p class="section-label reveal">Опыт работы</p>
+        <h2 class="section-title reveal reveal-delay-1">Кейсы</h2>
+      </div>
+
+      <!-- Тая Дейн -->
+      <div class="case-block reveal">
+        <div class="case-block__header">
+          <div class="case-block__left">
+            <div class="case-block__meta">
+              <span class="case-block__year">2020</span>
+              <span class="case-block__tag">Продюсер · CEO</span>
+            </div>
+            <div class="case-block__name">Онлайн-школа Таи Дейн</div>
+            <div class="case-block__role">Ниша: Омоложение</div>
+          </div>
+          <div class="case-block__result-big">
+            <div class="case-block__result-num">59 млн ₽</div>
+            <div class="case-block__result-sub">общая выручка</div>
+          </div>
+        </div>
+        <div class="case-block__before">
+          <strong>До прихода:</strong> продажи на 70 000 ₽, без системы
+        </div>
+        <div class="case-block__results-title">Результаты</div>
+        <ul class="case-block__list">
+          <li>Привлёк 400 000 подписчиков в Instagram (320 000 — органика, 80 000 — реклама)</li>
+          <li>Создал дополнительный аккаунт с нуля — 150 000 подписчиков без вложений</li>
+          <li>Запустил Telegram-канал на 10 000 подписчиков</li>
+          <li>Построил отделы маркетинга, продаж, контента и обучения</li>
+          <li>Внедрил систему: 19 000 продаж, выручка 59 млн ₽</li>
+          <li>Первыми в нише внедрили форматы, которые потом скопировали конкуренты: открытые марафоны, запуски на
+            высокий чек, партнёрские запуски</li>
+        </ul>
+      </div>
+
+      <!-- Мартынов -->
+      <div class="case-block reveal">
+        <div class="case-block__header">
+          <div class="case-block__left">
+            <div class="case-block__meta">
+              <span class="case-block__year">2022</span>
+              <span class="case-block__tag">Продюсер · Руководитель запуска</span>
+            </div>
+            <div class="case-block__name">Владислав Мартынов</div>
+            <div class="case-block__role">Ниша: Криптоинвестиции</div>
+          </div>
+          <div class="case-block__result-big">
+            <div class="case-block__result-num">млн ₽+</div>
+            <div class="case-block__result-sub">с первого запуска · NDA</div>
+          </div>
+        </div>
+        <div class="case-block__before">
+          <strong>До прихода:</strong> не было ничего — ни продукта, ни команды, ни аудитории
+        </div>
+        <div class="case-block__results-title">Результаты</div>
+        <ul class="case-block__list">
+          <li>Собрал команду, создал позиционирование, упаковку соцсетей, курс</li>
+          <li>Построил вебинарную воронку</li>
+          <li>Первый запуск — несколько миллионов ₽ прибыли (точные цифры под NDA)</li>
+        </ul>
+      </div>
+
+      <!-- ИОТ -->
+      <div class="case-block reveal">
+        <div class="case-block__header">
+          <div class="case-block__left">
+            <div class="case-block__meta">
+              <span class="case-block__year">2022 — н.в.</span>
+              <span class="case-block__tag">Сооснователь · Продюсер · CEO</span>
+            </div>
+            <div class="case-block__name">Институт Остеопатических Технологий</div>
+            <div class="case-block__role">Ниша: Остеопатия</div>
+          </div>
+          <div class="case-block__result-big">
+            <div class="case-block__result-num">74 млн ₽</div>
+            <div class="case-block__result-sub">за 3 года</div>
+          </div>
+        </div>
+        <div class="case-block__before">
+          <strong>До прихода:</strong> 24 000 подписчиков, максимальный запуск — 170 000 ₽
+        </div>
+        <div class="case-block__results-title">Результаты</div>
+        <ul class="case-block__list">
+          <li>Первый запуск — 1 млн ₽ за 2 недели</li>
+          <li>Рост год к году: 14 млн → 22 млн → 38 млн ₽ (74 млн ₽ суммарно за 3 года)</li>
+          <li>Instagram вырос до 109 000, Telegram — 10 000, YouTube — 10 000</li>
+          <li>Эксперта пригласили записать курсы в 5 крупнейших институтов и выступить на федеральном канале — бесплатно
+          </li>
+        </ul>
+      </div>
+
+      <!-- Хахадетка -->
+      <div class="case-block reveal">
+        <div class="case-block__header">
+          <div class="case-block__left">
+            <div class="case-block__meta">
+              <span class="case-block__year">2024</span>
+              <span class="case-block__tag">Продюсер</span>
+            </div>
+            <div class="case-block__name">Анна Хахадетка</div>
+            <div class="case-block__role">Ниша: Блогинг</div>
+          </div>
+          <div class="case-block__result-big">
+            <div class="case-block__result-num">1,8 млн ₽</div>
+            <div class="case-block__result-sub">первый запуск</div>
+          </div>
+        </div>
+        <div class="case-block__before">
+          <strong>До прихода:</strong> TikTok 9 млн, Instagram 900 000, Telegram 16 000 подписчиков — прогрев 4 мес,
+          запуск 300 000 ₽, аудитория выжжена
+        </div>
+        <div class="case-block__results-title">Результаты</div>
+        <ul class="case-block__list">
+          <li>Создал продукт с нуля, сформировал команду из 4 человек</li>
+          <li>Построил прогрев: короткие видео, сторис, Telegram, вебинар, VSL и скрипты для продаж</li>
+          <li>Восстановил охваты и лояльность аудитории</li>
+          <li>Первый запуск — 1,8 млн ₽</li>
+          <li>Выстроили фундамент для дальнейшего масштабирования</li>
+        </ul>
+      </div>
+
+      <!-- IT-Компот -->
+      <div class="case-block reveal">
+        <div class="case-block__header">
+          <div class="case-block__left">
+            <div class="case-block__meta">
+              <span class="case-block__year">2025</span>
+              <span class="case-block__tag">CMO</span>
+            </div>
+            <div class="case-block__name">IT-Компот</div>
+            <div class="case-block__role">Ниша: Онлайн-школа программирования для детей</div>
+          </div>
+          <div class="case-block__result-big">
+            <div class="case-block__result-num">$220K/мес</div>
+            <div class="case-block__result-sub">рекордный результат</div>
+          </div>
+        </div>
+        <div class="case-block__before">
+          <strong>До прихода:</strong> кассовый разрыв, отдела маркетинга нет, выручка до 10 млн ₽, системных запусков
+          не было
+        </div>
+        <div class="case-block__results-title">Результаты</div>
+        <ul class="case-block__list">
+          <li>1-й месяц: выстроил маркетинг с нуля, система внутренних запусков — 4 запуска, +5 млн ₽</li>
+          <li>Переупаковал позиционирование школы, расширил продуктовую линейку</li>
+          <li>4 коллаборации с блогерами и экспертами без вложений</li>
+          <li>2-й месяц: запуск на 18 млн ₽ (перекрыли кассовый разрыв)</li>
+          <li>Рекордный результат: 220 000 $/мес на второй месяц работы</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ ДОПОЛНИТЕЛЬНЫЕ КЕЙСЫ ═══ -->
+  <section class="cases-mini" id="cases-mini">
+    <div class="container">
+      <div class="cases-mini__label reveal">Дополнительные кейсы</div>
+      <div class="cases-mini__grid">
+        <div class="mini-case reveal">
+          <div class="mini-case__title">Личный Telegram-канал</div>
+          <div class="mini-case__desc">С нуля до 1 000 подписчиков — без рекламного бюджета</div>
+          <div class="mini-case__result">10 млн ₽ за 6 месяцев</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ ФОРМАТЫ ═══ -->
+  <section class="formats" id="formats">
+    <div class="container">
+      <p class="section-label reveal">Форматы</p>
+      <h2 class="section-title reveal reveal-delay-1">Как работаю</h2>
+      <div class="formats__grid">
+
+        <div class="format-row reveal">
+          <div class="format-row__label">
+            <div class="format-row__type">Полный цикл</div>
+            <div class="format-row__name">Продюсер</div>
+          </div>
+          <div class="format-row__desc">
+            Беру на себя бизнес-часть целиком: маркетинг, воронки, команда, запуски, частично продукт
+          </div>
+        </div>
+
+        <div class="format-row reveal reveal-delay-1">
+          <div class="format-row__label">
+            <div class="format-row__type">Маркетинг</div>
+            <div class="format-row__name">CMO</div>
+          </div>
+          <div class="format-row__desc">
+            Весь маркетинг под ключ: стратегия, мультиканальность, органика и платный трафик, смыслы, команда
+          </div>
+        </div>
+
+        <div class="format-row reveal reveal-delay-2">
+          <div class="format-row__label">
+            <div class="format-row__type">Управление</div>
+            <div class="format-row__name">CEO</div>
+          </div>
+          <div class="format-row__desc">
+            Управление проектом: от маленьких мощных команд до штата 150+ человек, работаю спринтами (Scrum)
+          </div>
+        </div>
+
+        <div class="format-row reveal reveal-delay-3">
+          <div class="format-row__label">
+            <div class="format-row__type">Стратегия</div>
+            <div class="format-row__name">Консультант / Трекер</div>
+          </div>
+          <div class="format-row__desc">
+            Диагностика, поиск точек роста, спринт-планирование (год → квартал → месяц → неделя), докрутка всех зон
+            проекта от продукта до маркетинга и продаж
+          </div>
+        </div>
+
+        <div class="format-row reveal reveal-delay-4">
+          <div class="format-row__label">
+            <div class="format-row__type">Координация</div>
+            <div class="format-row__name">Проджект</div>
+          </div>
+          <div class="format-row__desc">
+            Сопровождение запуска, связующее звено между всеми отделами в больших проектах
+          </div>
+        </div>
+
+        <div class="format-row reveal reveal-delay-5">
+          <div class="format-row__label">
+            <div class="format-row__type">Обучение</div>
+            <div class="format-row__name">Наставник</div>
+          </div>
+          <div class="format-row__desc">
+            Сопровождение запусков с нуля, выход в онлайн, масштабирование в формате консультаций и шэринга ресурсов
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ НАВЫКИ ═══ -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <p class="section-label reveal">Компетенции</p>
+      <h2 class="section-title reveal reveal-delay-1">Навыки</h2>
+      <div class="skills__inner">
+        <div class="reveal reveal-delay-2">
+          <div class="skills__col-title">Hard Skills</div>
+          <div class="skills__list">
+            <span class="skill-tag">Запуски в соцсетях</span>
+            <span class="skill-tag">Позиционирование и УТП</span>
+            <span class="skill-tag">Автоворонки</span>
+            <span class="skill-tag">Игровые воронки</span>
+            <span class="skill-tag">Контентные воронки</span>
+            <span class="skill-tag">VSL</span>
+            <span class="skill-tag">Вебинарные воронки</span>
+            <span class="skill-tag">Марафоны</span>
+            <span class="skill-tag">Контент-маркетинг</span>
+            <span class="skill-tag">Органический трафик</span>
+            <span class="skill-tag">YouTube · TikTok · Instagram</span>
+            <span class="skill-tag">Аналитика и сквозная</span>
+            <span class="skill-tag">Систематизация</span>
+            <span class="skill-tag">PR и репутация</span>
+            <span class="skill-tag">CustDev</span>
+            <span class="skill-tag">Трафик: органика, реклама, блогеры</span>
+            <span class="skill-tag">Управление штатом 150+</span>
+            <span class="skill-tag">Scrum</span>
+            <span class="skill-tag">Продуктовые стратегии</span>
+            <span class="skill-tag">Маркетинговая стратегия</span>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <div class="skills__col-title">Soft Skills</div>
+          <div class="skills__list">
+            <span class="skill-tag">Стратегическое мышление</span>
+            <span class="skill-tag">Helicopter View</span>
+            <span class="skill-tag">Язык прибыли</span>
+            <span class="skill-tag">Ответственность</span>
+            <span class="skill-tag">Лидерство</span>
+            <span class="skill-tag">Переговоры</span>
+            <span class="skill-tag">Партнёрства</span>
+            <span class="skill-tag">Антикризисное управление</span>
+            <span class="skill-tag">Поиск точек роста</span>
+            <span class="skill-tag">Стрессоустойчивость</span>
+            <span class="skill-tag">Фокус на ключевых действиях</span>
+            <span class="skill-tag">Креативное мышление</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ ОБРАЗОВАНИЕ ═══ -->
+  <section class="education" id="education">
+    <div class="container">
+      <p class="section-label reveal">Образование</p>
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 40px;">База</h2>
+      <div class="education__top reveal reveal-delay-2">
+        Более 3,5 млн ₽ вложено в образование
+      </div>
+      <div class="education__grid">
+        <div class="edu-card reveal">
+          <div class="edu-card__org">WSFIZ · Варшава</div>
+          <div class="edu-card__title">Психолог, Бакалавр</div>
+          <div class="edu-card__info">2015 – 2018</div>
+        </div>
+        <div class="edu-card reveal reveal-delay-1">
+          <div class="edu-card__org">ОИПП · Москва</div>
+          <div class="edu-card__title">MBA · Психолог-консультант</div>
+          <div class="edu-card__info">Диплом MBA</div>
+        </div>
+        <div class="edu-card reveal reveal-delay-2">
+          <div class="edu-card__org">Наставничества</div>
+          <div class="edu-card__title">Топовые эксперты рынка</div>
+          <div class="edu-card__info">Тимочко · Уланов · Граф · Маричева · Осипов · Дашкиев · Гребенюк · Удод · Тур
+          </div>
+        </div>
+        <div class="edu-card reveal reveal-delay-3">
+          <div class="edu-card__org">Дополнительные программы</div>
+          <div class="edu-card__title">10+ курсов и программ</div>
+          <div class="edu-card__info">Маркетинг · Продажи · Психология · Бизнес</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <div class="cta__inner">
+        <h2 class="cta__title reveal">ОБСУДИМ<br>ВАШ ПРОЕКТ?</h2>
+        <p class="cta__subtitle reveal reveal-delay-1">
+          Беру максимум 2–3 проекта одновременно.<br>
+          Сейчас есть 1 открытый слот.<br>
+          Работаю с фокусом — не распыляюсь.
+        </p>
+        <div class="cta__buttons reveal reveal-delay-2">
+          <a href="https://t.me/glebastashev" class="btn btn-primary" target="_blank" rel="noopener">Написать в
+            Telegram</a>
+          <a href="https://wa.me/995558184186" class="btn btn-outline-inv" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+        <div class="cta__contacts reveal reveal-delay-3">
+          <span class="cta__contact">Telegram: <a href="https://t.me/glebastashev" target="_blank"
+              rel="noopener">@glebastashev</a></span>
+          <span class="cta__contact">WhatsApp: <a href="https://wa.me/995558184186" target="_blank" rel="noopener">+995
+              558 184 186</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">ГЛЕБ АСТАШЕВ</span>
+        <span class="footer__roles">Продюсер · CMO · CEO · Консультант</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
